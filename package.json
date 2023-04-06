@@ -1,0 +1,26 @@
+{
+  "name": "leeds-api",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "engines": {
+    "node": "18"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src",
+    "start": "node dist/server.js"
+  },
+  "author": "Gabriel - Black Beans",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^8.2.1",
+    "fastify": "^4.15.0"
+  }
+}
