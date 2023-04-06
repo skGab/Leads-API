@@ -3,15 +3,15 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
 const leeds = async (app: FastifyInstance) => {
   // Carregue suas credenciais do arquivo JSON baixado
-  const credentials = require('./data/credentials.json');
   const sheets = google.sheets('v4');
-  const spreadsheetId = 'your_spreadsheet_id';
+  const spreadsheetId = process.env.SPREADSHEET_ID;
 
   // Autenticação
   const auth = new google.auth.GoogleAuth({
-    credentials,
+    keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
+
   const authToken = await auth.getClient();
 
   interface QueryParams {
