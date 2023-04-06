@@ -1,14 +1,14 @@
 {
   "name": "leeds-api",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "engines": {
     "node": "18"
   },
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/app.js",
     "build": "tsup src",
-    "start": "node dist/server.js"
+    "start": "node dist/app.js"
   },
   "author": "Gabriel - Black Beans",
   "license": "ISC",
