@@ -1,14 +1,8 @@
 import fastify, { FastifyInstance } from 'fastify';
-// import { PrismaClient } from '@prisma/client';
-// import users from './routes/users';
 import fastifyCors from '@fastify/cors';
 import leeds from './routes/leeds';
-import { IncomingMessage, ServerResponse } from 'http';
-import { createServer, Server } from 'http';
 
 const app: FastifyInstance = fastify();
-
-// const prisma = new PrismaClient();
 
 app.register(fastifyCors, {
   origin: true,
