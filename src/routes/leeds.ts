@@ -42,7 +42,7 @@ const leeds = async (app: FastifyInstance) => {
         await sheets.spreadsheets.values.append({
           auth: authToken,
           spreadsheetId,
-          range: 'Sheet1!A:E', // Adjust the range as necessary
+          range: 'Sheet1!A1:E', // Adjust the range as necessary
           valueInputOption: 'RAW',
           requestBody: {
             values: [requestData],
