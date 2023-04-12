@@ -1,6 +1,9 @@
 import fastify, { FastifyInstance } from 'fastify';
 import fastifyCors from '@fastify/cors';
-import leeds from './routes/leeds';
+import leeds from './routes/leads';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const app: FastifyInstance = fastify();
 
@@ -13,7 +16,7 @@ app.register(fastifyCors, {
 
   // Unix domain socket
   const unixDomainSocket =
-    '/srv/leeds-api.c09b59be.configr.cloud/etc/nodejs/nodejs.sock';
+    '/srv/leads-api.c09b59be.configr.cloud/etc/nodejs/nodejs.sock';
 
   // TCP/IP address and port
   const host = '0.0.0.0';
