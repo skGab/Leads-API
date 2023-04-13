@@ -16,7 +16,7 @@ const leeds = async (app: FastifyInstance) => {
 
   app.post('/leads', async (req: FastifyRequest, res: FastifyReply) => {
     const credentials = {
-      keyFilename: path.join(__dirname, '../data/credentials.json'),
+      keyFilename: path.join(__dirname, '../www/data/credentials.json'),
       projectId: 'black-beans-dados',
     };
 
@@ -58,14 +58,10 @@ const leeds = async (app: FastifyInstance) => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         console.error('Erro de validação:', error);
-        res
-          .status(400)
-          .send(
-            'Não foram encontrados dados no body da requisição ou estão invalidos'
-          );
+        res.status(400).send(error);
       } else {
         console.error('Erro ao enviar dados para o Big Query:', error);
-        res.status(500).send('Erro ao enviar dados para o Big Query');
+        res.status(500).send(error);
       }
     }
   });
