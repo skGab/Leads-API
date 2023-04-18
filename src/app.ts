@@ -5,7 +5,7 @@ import fastify, {
   FastifyRequest,
 } from 'fastify';
 import fastifyCors from '@fastify/cors';
-import leeds from './routes/leads';
+import clientes from './routes/clientes';
 import * as dotenv from 'dotenv';
 
 // Load environment variables from the .env file
@@ -21,7 +21,7 @@ app.register(fastifyCors, {
 
 (async () => {
   // Define the root endpoint
-  app.get('/', async (req: FastifyRequest, res: FastifyReply) => {
+  app.get('/', (req: FastifyRequest, res: FastifyReply) => {
     try {
       res.status(200).send('BLACK BEANS - Leads API');
     } catch (error) {
@@ -31,7 +31,7 @@ app.register(fastifyCors, {
   });
 
   // Register the leads route
-  await leeds(app);
+  await clientes(app);
 
   // Check if we are in a production environment
   if (process.env.NODE_ENV === 'production') {
