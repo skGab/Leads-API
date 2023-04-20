@@ -1,12 +1,25 @@
-import { Dataset, Table } from "@google-cloud/bigquery";
+// Import required classes from the BigQuery library
+import { Dataset, Table } from '@google-cloud/bigquery';
 
-// DELAY
-const delay = (ms: number) =>
+/**
+ * Creates a delay for a given duration.
+ * @param {number} ms - The duration of the delay in milliseconds.
+ * @return {Promise<void>} A promise that resolves after the given duration.
+ */
+const delay = (ms: number): Promise<void> =>
   new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 
-// CHECKING DB
+/**
+ * Creates a BigQuery table if it doesn't exist and returns the table.
+ * @param {Dataset} dataset - The BigQuery dataset instance.
+ * @param {string} tableName - The name of the table to be created.
+ * @param {{name: string; type: string; mode: string}[]} schema - The schema of the table to be created.
+ * @param {number} [maxRetries=3] - The maximum number of retries allowed before throwing an error.
+ * @return {Promise<Table>} A promise that resolves to the created or existing table.
+ * @throws Will throw an error if the table can't be created or accessed after the maximum number of retries.
+ */
 export async function createTableIfNotExists(
   dataset: Dataset,
   tableName: string,
@@ -22,7 +35,7 @@ export async function createTableIfNotExists(
       if (!exists) {
         const [createdTable] = await dataset.createTable(tableName, { schema });
         console.log(`Tabela ${tableName} criada`);
-        await delay(10000); // Wait for 1 second before proceeding
+        await delay(5000); // Wait for 5 seconds before proceeding
         return createdTable;
       } else {
         return table;

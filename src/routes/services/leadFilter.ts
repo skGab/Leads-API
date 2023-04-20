@@ -1,11 +1,22 @@
+// Import required dependencies
 import { z } from 'zod';
-import { clientSchema } from '../../schema';
+import { CoreDataItem, leadSchema } from '../../schema';
 
-type Lead = z.infer<typeof clientSchema>['leads'][number];
-export const coreDataBuffer: Array<any> = [];
+// Define the Lead type based on the client schema
+type Lead = z.infer<typeof leadSchema>['leads'][number];
 
-// FILTER
-export const leadFilter = (lead: Lead) => {
+interface LeadFilterResult {
+  coreData: CoreDataItem;
+  otherData: { [x: string]: any };
+}
+
+/**
+ * Filters and separates the given lead object into core data and other data.
+ * @param {Lead} lead - The lead object to be filtered.
+ * @return {LeadFilterResult} An object containing coreData and otherData properties.
+ */
+export const leadFilter = (lead: Lead): LeadFilterResult => {
+  // Initialize coreData and otherData objects
   const coreData: { [x: string]: any } = {};
   const otherData: { [x: string]: any } = {
     first_conversion: null,
@@ -24,9 +35,11 @@ export const leadFilter = (lead: Lead) => {
     ) {
       otherData[key] = value;
     } else {
+      // Include the key in coreData, with 'não preenchido' as the default value if value is null
       coreData[key] = value === null ? 'não preenchido' : value;
     }
   });
 
-  return { coreData, otherData };
+  // Return the filtered data as an object with coreData and otherData properties
+  return { coreData: coreData as CoreDataItem, otherData };
 };

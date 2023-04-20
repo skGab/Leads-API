@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const clientSchema = z.object({
+export const leadSchema = z.object({
   leads: z
     .array(
       z.object({
@@ -55,3 +55,28 @@ export const db_bigQuerySchema = [
   { name: 'uuid', type: 'STRING', mode: 'NULLABLE' },
   { name: 'fit_score', type: 'STRING', mode: 'NULLABLE' },
 ];
+
+export interface CoreDataItem {
+  id: string;
+  email: string;
+  name: string;
+  company: string;
+  job_title: string;
+  bio: string;
+  public_url: string;
+  created_at: string;
+  opportunity: string;
+  number_conversions: string;
+  user: string;
+  website: string;
+  personal_phone: string;
+  mobile_phone: string;
+  city: string;
+  state: string;
+  lead_stage: string;
+  last_marked_opportunity_date: string;
+  uuid: string;
+  fit_score: string;
+}
+
+export type CoreData = CoreDataItem[];

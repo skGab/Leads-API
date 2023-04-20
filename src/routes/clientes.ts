@@ -1,28 +1,37 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { clientSchema } from '../schema';
-import { leadFilter, coreDataBuffer } from './services/leadFilter';
+import { CoreData, leadSchema } from '../schema';
+import { leadFilter } from './services/leadFilter';
 import { sentChunk } from './services/sentChunk';
+import { BigQuery, Dataset } from '@google-cloud/bigquery';
+import { interval } from '../app';
 
-const interval = 5000; // Time to wait without requests before sending data (in ms)
 let timer: ReturnType<typeof setTimeout>;
 
-const clientes = async (app: FastifyInstance) => {
+const clientes = (
+  app: FastifyInstance,
+  clienteBuffer: CoreData,
+  db_dataset: Dataset,
+  bigqueryCliente: BigQuery
+) => {
   // Define the /clientes POST endpoint
   app.post('/clientes', async (req: FastifyRequest, res: FastifyReply) => {
     try {
       // Parse and validate the request body
-      const leads = clientSchema.parse(req.body).leads;
+      const leads = leadSchema.parse(req.body).leads;
 
       // Filter and process each lead
       leads.forEach((lead) => {
         const { coreData } = leadFilter(lead);
-        coreDataBuffer.push(coreData);
+        clienteBuffer.push(coreData);
       });
 
       // Clear the existing timer and set a new one
       clearTimeout(timer);
-      timer = setTimeout(sentChunk, interval);
+      timer = setTimeout(
+        () => sentChunk(clienteBuffer, db_dataset, bigqueryCliente),
+        interval
+      );
 
       // Send a success response
       res.status(200).send('Dados armazenados no buffer');
