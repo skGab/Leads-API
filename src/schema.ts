@@ -33,7 +33,7 @@ export const leadSchema = z.object({
     .nonempty(),
 });
 
-export const db_bigQuerySchema = [
+export const db_clienteSchema = [
   { name: 'id', type: 'STRING', mode: 'NULLABLE' },
   { name: 'email', type: 'STRING', mode: 'NULLABLE' },
   { name: 'name', type: 'STRING', mode: 'NULLABLE' },
@@ -41,9 +41,9 @@ export const db_bigQuerySchema = [
   { name: 'job_title', type: 'STRING', mode: 'NULLABLE' },
   { name: 'bio', type: 'STRING', mode: 'NULLABLE' },
   { name: 'public_url', type: 'STRING', mode: 'NULLABLE' },
-  { name: 'created_at', type: 'STRING', mode: 'NULLABLE' },
-  { name: 'opportunity', type: 'STRING', mode: 'NULLABLE' },
-  { name: 'number_conversions', type: 'STRING', mode: 'NULLABLE' },
+  { name: 'created_at', type: 'TIMESTAMP', mode: 'NULLABLE' },
+  { name: 'opportunity', type: 'BOOLEAN', mode: 'NULLABLE' },
+  { name: 'number_conversions', type: 'FLOAT', mode: 'NULLABLE' },
   { name: 'user', type: 'STRING', mode: 'NULLABLE' },
   { name: 'website', type: 'STRING', mode: 'NULLABLE' },
   { name: 'personal_phone', type: 'STRING', mode: 'NULLABLE' },
@@ -51,32 +51,15 @@ export const db_bigQuerySchema = [
   { name: 'city', type: 'STRING', mode: 'NULLABLE' },
   { name: 'state', type: 'STRING', mode: 'NULLABLE' },
   { name: 'lead_stage', type: 'STRING', mode: 'NULLABLE' },
-  { name: 'last_marked_opportunity_date', type: 'STRING', mode: 'NULLABLE' },
+  { name: 'last_marked_opportunity_date', type: 'TIMESTAMP', mode: 'NULLABLE' },
   { name: 'uuid', type: 'STRING', mode: 'NULLABLE' },
   { name: 'fit_score', type: 'STRING', mode: 'NULLABLE' },
+  { name: 'timestamp', type: 'TIMESTAMP', mode: 'NULLABLE' },
 ];
 
-export interface CoreDataItem {
-  id: string;
-  email: string;
-  name: string;
-  company: string;
-  job_title: string;
-  bio: string;
-  public_url: string;
-  created_at: string;
-  opportunity: string;
-  number_conversions: string;
-  user: string;
-  website: string;
-  personal_phone: string;
-  mobile_phone: string;
-  city: string;
-  state: string;
-  lead_stage: string;
-  last_marked_opportunity_date: string;
-  uuid: string;
-  fit_score: string;
-}
-
-export type CoreData = CoreDataItem[];
+export const db_tempSchema = [
+  { name: 'id', type: 'STRING', mode: 'NULLABLE' },
+  { name: 'opportunity', type: 'BOOLEAN', mode: 'NULLABLE' },
+  { name: 'lead_stage', type: 'STRING', mode: 'NULLABLE' },
+  { name: 'timestamp', type: 'TIMESTAMP', mode: 'NULLABLE' },
+];

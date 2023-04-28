@@ -1,40 +1,65 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { CoreData, leadSchema } from '../schema';
-import { leadFilter } from './services/leadFilter';
-import { sentChunk } from './services/sentChunk';
-import { BigQuery, Dataset } from '@google-cloud/bigquery';
-import { interval } from '../app';
-
-let timer: ReturnType<typeof setTimeout>;
+import { leadSchema } from '../schema';
+import { scopeCoreData } from '../services/scopeCoreData';
+import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
+import { sentStreaming } from '../services/sentStreaming';
+import { CoreData, LeadSearched } from '../interfaces';
 
 const clientes = (
   app: FastifyInstance,
-  clienteBuffer: CoreData,
+  dataBuffer: CoreData,
   db_dataset: Dataset,
-  bigqueryCliente: BigQuery
+  db_table: Table,
+  tempTable: Table,
+  bigqueryCliente: BigQuery,
+  failedUniqueDataBuffer: CoreData,
+  failedUpdatedDataBuffer: LeadSearched[]
 ) => {
+  // Time to wait without requests before sending data (in ms)
+  let sendTimer: NodeJS.Timeout | null = null;
+  let interval = 5000;
+
   // Define the /clientes POST endpoint
   app.post('/clientes', async (req: FastifyRequest, res: FastifyReply) => {
     try {
       // Parse and validate the request body
       const leads = leadSchema.parse(req.body).leads;
 
-      // Filter and process each lead
+      // Scoping and process each lead
       leads.forEach((lead) => {
-        const { coreData } = leadFilter(lead);
-        clienteBuffer.push(coreData);
+        const { coreData } = scopeCoreData(lead);
+
+        dataBuffer.push(coreData);
       });
 
-      // Clear the existing timer and set a new one
-      clearTimeout(timer);
-      timer = setTimeout(
-        () => sentChunk(clienteBuffer, db_dataset, bigqueryCliente),
-        interval
-      );
+      console.log('Leads recebidos:', dataBuffer.length);
+      console.log('---------------------------------------');
 
-      // Send a success response
-      res.status(200).send('Dados armazenados no buffer');
+      // Cancel previous timer if it exists
+      if (sendTimer !== null) {
+        clearTimeout(sendTimer);
+      }
+      // Set a new timer
+      sendTimer = setTimeout(async () => {
+        try {
+          await sentStreaming(
+            dataBuffer,
+            db_dataset,
+            db_table,
+            tempTable,
+            bigqueryCliente,
+            failedUniqueDataBuffer,
+            failedUpdatedDataBuffer
+          );
+          console.log('Leads armazenados no BigQuery');
+          res.status(200).send('Dados armazenados no BigQuery');
+        } catch (error) {
+          console.error('Erro ao enviar dados para o BigQuery:', error);
+          res.status(500).send(error);
+        }
+      }, interval); // 5-second delay
+      res.status(202).send('Dados na fila de inserção');
     } catch (error) {
       // Handle validation errors
       if (error instanceof z.ZodError) {
@@ -42,7 +67,7 @@ const clientes = (
         res.status(400).send(error);
       } else {
         // Handle other errors
-        console.error('Erro ao enviar dados para o Big Query:', error);
+        console.error('Erro ao enviar dados para o BigQuery:', error);
         res.status(500).send(error);
       }
     }
