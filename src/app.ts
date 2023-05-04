@@ -68,7 +68,7 @@ app.register(fastifyCors, {
     // Registering Routes
     app.get('/', (req: FastifyRequest, res: FastifyReply) => {
       try {
-        res.status(200).send('BLACK BEANS - Leads API');
+        res.status(200).send('BLACK BEANS - Leads API v.2');
       } catch (error) {
         console.error('Falha na aplicação:', error);
         res.status(500).send('Falha na aplicação');

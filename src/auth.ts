@@ -4,7 +4,7 @@ import path from 'path';
 export const auth = {
   keyFilename: path.join(
     __dirname,
-    process.env.AUTH_CREDENTIALS ?? '../data/credentials.json'
+    process.env.AUTH_CREDENTIALS ?? '../www/data/credentials.json'
   ),
   projectId: 'black-beans-dados',
 };

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "tsx watch src/app.ts",
-    "build": "tsup src",
+    "build": "tsup src/app.ts",
     "start": "node app.js"
   },
   "author": "Gabriel - Black Beans",
