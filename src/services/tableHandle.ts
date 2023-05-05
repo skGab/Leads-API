@@ -1,5 +1,6 @@
 // Import required classes from the BigQuery library
 import { Dataset, Table } from '@google-cloud/bigquery';
+import { logger } from './logger';
 
 const delay = (ms: number): Promise<void> =>
   new Promise((resolve) => {
@@ -28,7 +29,7 @@ export async function createTableIfNotExists(
       }
     } catch (error) {
       if (attempt === maxRetries) {
-        console.error(
+        logger.error(
           `Failed to create table ${tableName} after ${maxRetries} attempts.`
         );
         throw error;

@@ -14,6 +14,7 @@ import { createTableIfNotExists } from './services/tableHandle';
 import { CoreData } from './interfaces';
 import { startServer } from './server';
 import { LeadSearched } from './interfaces';
+import { logger } from './services/logger';
 
 // Load environment variables from the .env file
 dotenv.config();
@@ -70,7 +71,7 @@ app.register(fastifyCors, {
       try {
         res.status(200).send('BLACK BEANS - Leads API v.2');
       } catch (error) {
-        console.error('Falha na aplicação:', error);
+        logger.error('Falha na aplicação:', error);
         res.status(500).send('Falha na aplicação');
       }
     });
@@ -90,6 +91,6 @@ app.register(fastifyCors, {
     // Start the server after setting up the app
     startServer(app);
   } catch (error) {
-    console.error('Erro ao criar a tabela ou configurar rotas:', error);
+    logger.error('Erro ao criar a tabela ou configurar rotas:', error);
   }
 })();

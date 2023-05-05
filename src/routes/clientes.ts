@@ -5,6 +5,7 @@ import { scopeCoreData } from '../services/scopeCoreData';
 import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
 import { sentStreaming } from '../services/sentStreaming';
 import { CoreData, LeadSearched } from '../interfaces';
+import { logger } from '../services/logger';
 
 const clientes = (
   app: FastifyInstance,
@@ -55,7 +56,7 @@ const clientes = (
           console.log('Leads armazenados no BigQuery');
           res.status(200).send('Dados armazenados no BigQuery');
         } catch (error) {
-          console.error('Erro ao enviar dados para o BigQuery:', error);
+          logger.error('Erro ao enviar dados para o BigQuery:', error);
           res.status(500).send(error);
         }
       }, interval); // 5-second delay
@@ -63,11 +64,11 @@ const clientes = (
     } catch (error) {
       // Handle validation errors
       if (error instanceof z.ZodError) {
-        console.error('Erro de validação:', error);
+        logger.error('Erro de validação:', error);
         res.status(400).send(error);
       } else {
         // Handle other errors
-        console.error('Erro ao enviar dados para o BigQuery:', error);
+        logger.error('Erro ao enviar dados para o BigQuery:', error);
         res.status(500).send(error);
       }
     }

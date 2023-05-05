@@ -8,12 +8,9 @@ import { getExistingLeadIdsInBigQuery } from './leadExistence';
 import separateLeads from './separateLeads';
 import updateExistingLeads from './handleLeadUpdates';
 import { removeDuplicateIds } from './removeDuplicate';
-import {
-  CoreData,
-  ExtendedInsertRowsResponse,
-  LeadSearched,
-} from '../interfaces';
+import { CoreData, LeadSearched } from '../interfaces';
 import mergeFailedData from './mergeFailedData';
+import { logger } from './logger';
 
 export const sentStreaming = async (
   dataBuffer: CoreData,
@@ -93,7 +90,7 @@ export const sentStreaming = async (
       dataBuffer.length = 0;
     })
     .catch((error) => {
-      console.error('Error when inserting or updating data:', error);
+      logger.error('Error when inserting or updating data:', error);
 
       // If you want to propagate the specific errors to the client route when one of the promises fails
       throw error;
