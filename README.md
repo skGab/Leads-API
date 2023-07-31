@@ -1,34 +1,100 @@
-#Leads API
-A Leads API é um servidor Node.js construído com TypeScript e Fastify para lidar com leads do RD Station e armazená-los no Google BigQuery.
+<!-- TITLE -->
+<h1 align="center" color="black">Leads Api</h1>
 
-Instalação
-Certifique-se de ter o Node.js >= 12 instalado em sua máquina.
-Clone o repositório.
-Execute npm install para instalar as dependências.
+<!-- THUMB -->
+<p align="center">
+        <img src="./static/doc_thumb.png" style="box-shadow: 1px 2px 4px gray;" alt="Logo do Projeto" object-fit="cover">
+</p>
 
-Configuração
-Certifique-se de adicionar o arquivo credentials.json para autenticação do Google Cloud na pasta www/data.
+<!-- STATUS -->
+<div align="center">
 
-Executando o servidor
-Existem três scripts disponíveis no package.json:
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/zDeep10/Leads-API.svg)](https://github.com/zDeep10/Leads-API/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/zDeep10/Leads-API.svg)](https://github.com/zDeep10/Leads-API/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-dev: Inicia o servidor no modo de desenvolvimento usando tsx watch src/app.ts.
-build: Compila os arquivos de origem TypeScript usando tsup src.
-start: Inicia o servidor de produção usando node app.js.
-Para executar o servidor no modo de desenvolvimento, execute npm run dev.
+</div>
 
-Para compilar e executar o servidor no modo de produção, execute npm run build seguido por npm run start.
+---
 
-Endpoints da API
-O servidor expõe os seguintes endpoints:
+<!-- DESCRIPTION -->
+<p align="center"> 
+        💡 
+        Portfolio pessoal desenvolvido com SvelteKit e Typescript. Através de uma interface moderna e responsiva, apresento uma breve introdução sobre minha trajetória, bem como detalhes e links para projetos desenvolvidos.
+  <br> 
+</p>
 
-GET /: Retorna uma mensagem de boas-vindas para a Leads API.
-POST /leads: Aceita um array de leads com as propriedades id, email e nome. Armazena os leads no Google BigQuery.
-Validação de Dados
-A validação de dados é feita usando a biblioteca de validação de esquemas Zod. O objeto WebhookDataSchema é usado para validar o corpo da solicitação do endpoint /leads.
+<!-- INTRO -->
 
-Integração com o Google BigQuery
-O servidor utiliza o pacote @google-cloud/bigquery para interagir com o Google BigQuery. Os dados dos leads são armazenados na tabela leads_table sob o conjunto de dados teste.
+## Índice
 
-Tratamento de Erros
-O tratamento de erros é feito usando as capacidades de tratamento de erros do Fastify. Erros de validação são registrados e respondidos com um código de status 400, enquanto outros erros são registrados e respondidos com um código de status 500.
+- [Tecnologias](#tecnologies)
+- [Objetivo](#goal)
+- [Funcionalidades](#features)
+- [Requerimentos de qualidade](#quality)
+- [Instruções de Uso](#glossary)
+- [Autor](#authors)
+
+## Tecnologias <a name="tecnologies"></a>
+
+- Sveltekit
+- Typescript
+- Sass
+- AOS (Animações)
+
+## Objetivo <a name="goal"></a>
+
+A proposta é oferecer uma plataforma bem estruturada e visualmente atrativa, com o propósito de destacar habilidades e experiências de mercado.
+
+## Funcionalidades <a name="features"></a>
+
+- Requisição de repositorios - API
+
+## Requerimentos de qualidade <a name="quality"></a>
+
+- Responsividade
+- Performance
+- Sustentável
+
+## Instruções de Uso <a name="glossary"></a>
+
+- Certifique-se de ter o Node.js instalado em seu sistema. Em seguida, execute o seguinte comando para instalar as dependências do projeto:
+
+`npm install`
+
+<br>
+
+- Para iniciar o servidor de desenvolvimento local, utilize o seguinte comando:
+
+`npm run dev`
+
+O sistema estará disponível em http://localhost:5000/. As alterações no código serão recarregadas automaticamente no navegador durante o desenvolvimento.
+
+<br>
+
+- Para criar a versão final do projeto otimizada para produção, execute o seguinte comando:
+
+`npm run build`
+
+Os arquivos finais serão gerados na pasta 'build'.
+
+<br>
+
+- Após o processo de build, visualize a versão de produção localmente com o seguinte comando:
+
+`npm run preview`
+
+O sistema estará disponível em http://localhost:5000/ em uma versão otimizada para produção.
+
+<br>
+
+- O projeto utiliza ESLint para análise estática do código e Prettier para formatação. Verifique problemas de linting ou formate o código automaticamente com os seguintes comandos:
+
+`npm run lint`
+
+`npm run format `
+
+## Autor <a name="authors"></a>
+
+- [@Gabriel Assunção](https://github.com/zDeep10) - Ideia e Construção.
