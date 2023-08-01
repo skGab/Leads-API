@@ -2,7 +2,7 @@ import { BigQuery } from '@google-cloud/bigquery';
 import path from 'path';
 
 // Get the NODE_ENV value
-const env = process.env.NODE_ENV;
+const env = process.env['NODE_ENV'];
 
 // Set the path based on the environment
 const credentialsPath =

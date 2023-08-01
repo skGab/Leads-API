@@ -1,10 +1,10 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { leadSchema } from '../schema';
 import { scopeCoreData } from '../services/scopeCoreData';
-import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
+import { Table } from '@google-cloud/bigquery';
 import { sentStreaming } from '../services/sentStreaming';
-import { CoreData, LeadSearched } from '../interfaces';
+import { CoreData } from '../interfaces';
 import { logger } from '../services/logger';
 import { db_dataset } from '../auth';
 import { app } from '../app';
