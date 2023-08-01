@@ -1,4 +1,3 @@
-import { CoreData } from './../interfaces';
 import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
 import { LeadSearched } from '../interfaces';
 import {

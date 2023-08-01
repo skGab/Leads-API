@@ -8,8 +8,7 @@ import { getExistingLeadIdsInBigQuery } from './leadExistence';
 import separateLeads from './separateLeads';
 import updateExistingLeads from './handleLeadUpdates';
 import { removeDuplicateIds } from './removeDuplicate';
-import { CoreData, LeadSearched } from '../interfaces';
-import mergeFailedData from './mergeFailedData';
+import { CoreData } from '../interfaces';
 import { logger } from './logger';
 
 export const sentStreaming = async (
@@ -17,9 +16,7 @@ export const sentStreaming = async (
   db_dataset: Dataset,
   db_table: Table,
   tempTable: Table,
-  bigqueryClient: BigQuery,
-  failedUniqueDataBuffer: CoreData,
-  failedUpdatedDataBuffer: LeadSearched[]
+  bigqueryClient: BigQuery
 ): Promise<void> => {
   // Remove duplicate IDs from dataBuffer, keeping only the last object
   const filteredDataBuffer = removeDuplicateIds(dataBuffer);

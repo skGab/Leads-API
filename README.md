@@ -3,7 +3,7 @@
 
 <!-- THUMB -->
 <p align="center">
-        <img src="./static/doc_thumb.png" width="200" alt="Logo do Projeto" object-fit="cover">
+        <img src="./static/doc_thumb.png" width="250" alt="Logo do Projeto" object-fit="cover">
 </p>
 
 <!-- STATUS -->
@@ -21,7 +21,7 @@
 <!-- DESCRIPTION -->
 <p align="center"> 
         💡 
-        Portfolio pessoal desenvolvido com SvelteKit e Typescript. Através de uma interface moderna e responsiva, apresento uma breve introdução sobre minha trajetória, bem como detalhes e links para projetos desenvolvidos.
+        A Leads API é um servidor Node.js construído com TypeScript e Fastify para lidar com leads do RD Station e armazená-los no Google BigQuery.
   <br> 
 </p>
 
@@ -29,37 +29,45 @@
 
 ## Índice
 
-- [Tecnologias](#tecnologies)
+- [Tecnologias](#technologies)
 - [Objetivo](#goal)
 - [Funcionalidades](#features)
 - [Requerimentos de qualidade](#quality)
 - [Instruções de Uso](#glossary)
 - [Autor](#authors)
 
-## Tecnologias <a name="tecnologies"></a>
+## Tecnologias <a name="technologies"></a>
 
-- Sveltekit
+- Node.Js
 - Typescript
-- Sass
-- AOS (Animações)
+- Fastify
+- Zod (Validações)
+- Winston (Tratando Erros)
 
 ## Objetivo <a name="goal"></a>
 
-A proposta é oferecer uma plataforma bem estruturada e visualmente atrativa, com o propósito de destacar habilidades e experiências de mercado.
+O objetivo da Leads API é receber dados via webhook da plataforma RD Station e executar os devidos tratamentos, incluindo a verificação de tipos de dados, a criação de tabelas e a inserção desses dados no Google BigQuery. Essa abordagem permite a coleta e organização eficiente dos leads, possibilitando análises detalhadas por meio das funcionalidades do Google Console. Através dessas análises, a equipe de marketing e vendas poderá obter insights valiosos para aprimorar suas estratégias, tomar decisões embasadas em dados e otimizar o desempenho geral do processo de geração de leads e conversão de clientes.
 
 ## Funcionalidades <a name="features"></a>
 
-- Requisição de repositorios - API
+- Recebimento de dados via Webhook
+- Atualização de dados no Bigquery
+- Inserção de dados no bigquery
+- Criação de tabelas
+- Categorização de Leads (Leads novos && Leads para atualização)
+- Remoção de Leads duplicados
+- Filtra os campos principais dos dados
 
 ## Requerimentos de qualidade <a name="quality"></a>
 
-- Responsividade
 - Performance
-- Sustentável
+- Sustentável (Melhorar)
+- Disponibilidade 24/7
+- Escalavel
 
 ## Instruções de Uso <a name="glossary"></a>
 
-- Certifique-se de ter o Node.js instalado em seu sistema. Em seguida, execute o seguinte comando para instalar as dependências do projeto:
+- Certifique-se de ter o Node.js instalado em seu sistema, clone o repositorio e em seguida execute o comando para instalar as dependências do projeto:
 
 `npm install`
 
