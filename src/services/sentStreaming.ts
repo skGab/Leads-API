@@ -6,9 +6,9 @@ import {
 } from '@google-cloud/bigquery';
 import { getExistingLeadIdsInBigQuery } from './leadExistence';
 import separateLeads from './separateLeads';
-import updateExistingLeads from './handleLeadUpdates';
+import updateExistingLeads from './update/handleLeadUpdates';
 import { removeDuplicateIds } from './removeDuplicate';
-import { CoreData } from '../interfaces';
+import { CoreData } from '../helpers/interfaces';
 import { logger } from './logger';
 
 export const sentStreaming = async (

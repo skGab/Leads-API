@@ -1,7 +1,7 @@
 import { Table } from '@google-cloud/bigquery';
 import { logger } from './logger';
-import { db_dataset } from '../auth';
-import { db_clienteSchema, db_tempSchema } from '../schema';
+import { db_dataset } from '../helpers/auth';
+import { db_clienteSchema, db_tempSchema } from '../helpers/schema';
 
 // Define variables to hold table references
 export let db_table: Table;

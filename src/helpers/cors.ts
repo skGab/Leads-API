@@ -1,5 +1,5 @@
 import { fastifyCors } from '@fastify/cors';
-import { app } from './app';
+import { app } from '../app';
 
 // When the function corsRegister() is called, it modifies the app object by registering the CORS plugin and setting up the origin-checking logic.
 export default function corsRegister() {

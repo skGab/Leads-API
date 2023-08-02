@@ -7,10 +7,10 @@ import fastify, {
 import clientes from './routes/clientes';
 import * as dotenv from 'dotenv';
 import { db_table, tableHandle, tempTable } from './services/tableHandle';
-import { CoreData } from './interfaces';
+import { CoreData } from './helpers/interfaces';
 import { startServer } from './server';
 import { logger } from './services/logger';
-import corsRegister from './cors';
+import corsRegister from './helpers/cors';
 
 // Load environment variables from the .env file
 dotenv.config();

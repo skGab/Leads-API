@@ -1,4 +1,4 @@
-import { CoreData, LeadSearched } from '../interfaces';
+import { CoreData, LeadSearched } from '../helpers/interfaces';
 
 /**
  * This function receives the failed data and the new data and returns both merged.

@@ -1,13 +1,13 @@
-import { CoreData } from '../interfaces';
+import { CoreData } from '../helpers/interfaces';
 
 /**
  * Removes duplicate entries from the provided data buffer based on their 'id' property.
  * @param {CoreData} dataBuffer - The data buffer containing the CoreData items to be filtered.
  * @return {CoreData} A new data buffer with duplicate entries removed.
  */
-export function removeDuplicateIds(dataBuffer: CoreData): CoreData | string {
+export function removeDuplicateIds(dataBuffer: CoreData): CoreData {
   if (!dataBuffer) {
-    return 'Sem dados no buffer para a remoção';
+    throw new Error('Sem dados no buffer para a remoção');
   }
 
   // Initialize a new filtered data buffer and a Set to store unique ids

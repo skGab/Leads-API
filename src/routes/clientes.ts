@@ -1,14 +1,14 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { leadSchema } from '../schema';
+import { leadSchema } from '../helpers/schema';
 import { scopeCoreData } from '../services/scopeCoreData';
 import { Table } from '@google-cloud/bigquery';
 import { sentStreaming } from '../services/sentStreaming';
-import { CoreData } from '../interfaces';
+import { CoreData } from '../helpers/interfaces';
 import { logger } from '../services/logger';
-import { db_dataset } from '../auth';
+import { db_dataset } from '../helpers/auth';
 import { app } from '../app';
-import { bigqueryClient } from '../auth';
+import { bigqueryClient } from '../helpers/auth';
 
 const clientes = (dataBuffer: CoreData, db_table: Table, tempTable: Table) => {
   // Time to wait without requests before sending data (in ms)

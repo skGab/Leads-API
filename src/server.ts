@@ -4,7 +4,7 @@ import { logger } from './services/logger';
 // Function to start the server
 export function startServer(app: FastifyInstance) {
   // Check if we are in a production environment
-  if (process.env.NODE_ENV == 'development') {
+  if (process.env['NODE_ENV'] == 'development') {
     // Start the server in development mode
     app.listen({ port: 3333, host: '0.0.0.0' } as any, (err, address) => {
       if (err) {
