@@ -6,8 +6,7 @@ import fastify, {
 } from 'fastify';
 import clientes from './routes/clientes';
 import * as dotenv from 'dotenv';
-import { db_clienteSchema, db_tempSchema } from './schema';
-import { createTableIfNotExists } from './services/tableHandle';
+import { db_table, tableHandle, tempTable } from './services/tableHandle';
 import { CoreData } from './interfaces';
 import { startServer } from './server';
 import { logger } from './services/logger';
@@ -29,12 +28,7 @@ corsRegister();
 (async function setupApp() {
   try {
     // Create the table if it doesn't exist
-    const db_table = await createTableIfNotExists('clientes', db_clienteSchema);
-
-    const tempTable = await createTableIfNotExists(
-      'temp_updated_leads',
-      db_tempSchema
-    );
+    tableHandle();
 
     // Registering Routes
     app.get('/', (_req: FastifyRequest, res: FastifyReply) => {

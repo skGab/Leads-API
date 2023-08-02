@@ -1,19 +1,24 @@
-// Import required classes from the BigQuery library
-import { Dataset, Table } from '@google-cloud/bigquery';
+import { Table } from '@google-cloud/bigquery';
 import { logger } from './logger';
 import { db_dataset } from '../auth';
+import { db_clienteSchema, db_tempSchema } from '../schema';
 
-const delay = (ms: number): Promise<void> =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+// Define variables to hold table references
+export let db_table: Table;
+export let tempTable: Table;
 
-export async function createTableIfNotExists(
+// Function to create a table if it doesn't exist
+async function createTableIfNotExists(
   tableName: string,
   schema: { name: string; type: string; mode: string }[],
   maxRetries: number = 3
 ): Promise<Table> {
   const table = db_dataset.table(tableName);
+
+  const delay = (ms: number): Promise<void> =>
+    new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -51,4 +56,15 @@ export async function createTableIfNotExists(
   throw new Error(
     `Failed to create or access table ${tableName} after ${maxRetries} attempts.`
   );
+}
+
+// Function to handle table creation
+export async function tableHandle() {
+  // Create or get the 'clientes' table using the specified schema
+  db_table = await createTableIfNotExists('clientes', db_clienteSchema);
+
+  // Create or get the 'temp_updated_leads' table using the specified schema
+  tempTable = await createTableIfNotExists('temp_updated_leads', db_tempSchema);
+
+  return;
 }
