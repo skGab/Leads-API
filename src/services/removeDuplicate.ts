@@ -1,4 +1,4 @@
-import { CoreData } from '../interfaces';
+import { CoreData } from '../helpers/interfaces';
 
 /**
  * Removes duplicate entries from the provided data buffer based on their 'id' property.
@@ -6,6 +6,10 @@ import { CoreData } from '../interfaces';
  * @return {CoreData} A new data buffer with duplicate entries removed.
  */
 export function removeDuplicateIds(dataBuffer: CoreData): CoreData {
+  if (!dataBuffer) {
+    throw new Error('Sem dados no buffer para a remoção');
+  }
+
   // Initialize a new filtered data buffer and a Set to store unique ids
   const filteredDataBuffer: CoreData = [];
   const idSet = new Set();
@@ -13,6 +17,11 @@ export function removeDuplicateIds(dataBuffer: CoreData): CoreData {
   // Iterate through the data buffer in reverse order
   for (let i = dataBuffer.length - 1; i >= 0; i--) {
     const coreData = dataBuffer[i];
+
+    // Check if 'coreData' is undefined, and skip this iteration if it is
+    if (!coreData) {
+      continue;
+    }
 
     // If the idSet does not contain the current 'id', add the coreData to the filtered buffer
     if (!idSet.has(coreData.id)) {

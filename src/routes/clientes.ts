@@ -1,22 +1,16 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import { leadSchema } from '../schema';
+import { leadSchema } from '../helpers/schema';
 import { scopeCoreData } from '../services/scopeCoreData';
-import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
+import { Table } from '@google-cloud/bigquery';
 import { sentStreaming } from '../services/sentStreaming';
-import { CoreData, LeadSearched } from '../interfaces';
+import { CoreData } from '../helpers/interfaces';
 import { logger } from '../services/logger';
+import { db_dataset } from '../helpers/auth';
+import { app } from '../app';
+import { bigqueryClient } from '../helpers/auth';
 
-const clientes = (
-  app: FastifyInstance,
-  dataBuffer: CoreData,
-  db_dataset: Dataset,
-  db_table: Table,
-  tempTable: Table,
-  bigqueryCliente: BigQuery,
-  failedUniqueDataBuffer: CoreData,
-  failedUpdatedDataBuffer: LeadSearched[]
-) => {
+const clientes = (dataBuffer: CoreData, db_table: Table, tempTable: Table) => {
   // Time to wait without requests before sending data (in ms)
   let sendTimer: NodeJS.Timeout | null = null;
   let interval = 5000;
@@ -49,9 +43,7 @@ const clientes = (
             db_dataset,
             db_table,
             tempTable,
-            bigqueryCliente,
-            failedUniqueDataBuffer,
-            failedUpdatedDataBuffer
+            bigqueryClient
           );
           console.log('Leads armazenados no BigQuery');
           res.status(200).send('Dados armazenados no BigQuery');

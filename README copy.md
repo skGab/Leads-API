@@ -1,6 +1,3 @@
-#Leads API
-A Leads API é um servidor Node.js construído com TypeScript e Fastify para lidar com leads do RD Station e armazená-los no Google BigQuery.
-
 Instalação
 Certifique-se de ter o Node.js >= 12 instalado em sua máquina.
 Clone o repositório.

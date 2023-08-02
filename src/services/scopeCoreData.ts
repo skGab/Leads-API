@@ -1,5 +1,5 @@
 // Import required dependencies
-import { CoreDataItem, Lead, LeadFilterResult } from '../interfaces';
+import { CoreDataItem, Lead, LeadFilterResult } from '../helpers/interfaces';
 
 // Define a function to convert the value based on the schema
 const convertValue = (key: string, value: unknown): any => {

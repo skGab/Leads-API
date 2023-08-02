@@ -1,6 +1,6 @@
 // Import required classes from the BigQuery library
 import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
-import { LeadSearched } from '../interfaces';
+import { LeadSearched } from '../helpers/interfaces';
 
 /**
  * Check the existence of leads in the BigQuery table and returns the list of existing lead IDs.

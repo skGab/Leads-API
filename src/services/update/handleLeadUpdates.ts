@@ -1,13 +1,9 @@
-import { CoreData } from './../interfaces';
 import { BigQuery, Dataset, Table } from '@google-cloud/bigquery';
-import { LeadSearched } from '../interfaces';
-import {
-  getOldRowsFromMain,
-  getOldRowsFromTemp,
-  updateLeads,
-  deleteOldRowsFromTemp,
-  insertUpdatedData,
-} from './updateHelpers';
+import { LeadSearched } from '../../helpers/interfaces';
+import { deleteOldRowsFromTemp } from '../delete/deleteOldRows';
+import { getOldRowsFromMain, getOldRowsFromTemp } from '../get/getOldRows';
+import { insertUpdatedData } from './insertUpdatedData';
+import { updateLeads } from './updateData';
 
 export default async function handleLeadUpdates(
   bigqueryClient: BigQuery,

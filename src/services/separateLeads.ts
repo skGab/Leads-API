@@ -1,4 +1,4 @@
-import { CoreData, LeadSearched } from '../interfaces';
+import { CoreData, LeadSearched } from '../helpers/interfaces';
 
 export default function separateLeads(
   filteredDataBuffer: CoreData,
