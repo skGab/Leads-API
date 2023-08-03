@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { leadSchema } from './schema';
 import { InsertRowsResponse } from '@google-cloud/bigquery';
+import { leadSchema } from './schema';
 
 // Interface representing authentication-related information
 export interface Auth {

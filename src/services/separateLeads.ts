@@ -2,7 +2,7 @@ import { CoreData, LeadSearched } from '../helpers/interfaces';
 
 export default function separateLeads(
   filteredDataBuffer: CoreData,
-  existingLeadData: LeadSearched[]
+  existingLeadData: LeadSearched[],
 ): { uniqueCoreDataList: CoreData; updatedCoreDataList: LeadSearched[] } {
   const uniqueCoreDataList: CoreData = [];
   const updatedCoreDataList: LeadSearched[] = [];
@@ -10,13 +10,13 @@ export default function separateLeads(
   // Separate leads that need to be inserted and updated
   filteredDataBuffer.forEach((coreData) => {
     const existingLead = existingLeadData.find(
-      (lead) => lead.id === coreData.id
+      (lead) => lead.id === coreData.id,
     );
     if (existingLead) {
       // Compare opportunity and lead_stage fields, and add to updatedCoreDataList if they are different
       if (
-        existingLead.opportunity !== coreData.opportunity ||
-        existingLead.lead_stage !== coreData.lead_stage
+        existingLead.opportunity !== coreData.opportunity
+        || existingLead.lead_stage !== coreData.lead_stage
       ) {
         updatedCoreDataList.push({
           id: coreData.id,
@@ -27,7 +27,7 @@ export default function separateLeads(
 
         // DEBUGGING
         console.log(
-          `O Lead ${coreData.name} está com campos diferentes e foi adicionado na fila de atualizações`
+          `O Lead ${coreData.name} está com campos diferentes e foi adicionado na fila de atualizações`,
         );
         console.log('Novos campos:', {
           opportunity: coreData.opportunity,

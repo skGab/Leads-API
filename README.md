@@ -77,7 +77,7 @@ O objetivo da Leads API é receber dados via webhook da plataforma RD Station e 
 
 `npm run dev`
 
-O sistema estará disponível em http://localhost:5000/. As alterações no código serão recarregadas automaticamente no navegador durante o desenvolvimento.
+O sistema estará disponível em http://localhost:5000/. As alterações no código serão recarregadas automaticamente no console.
 
 <br>
 

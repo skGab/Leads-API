@@ -11,14 +11,13 @@ export let tempTable: Table;
 async function createTableIfNotExists(
   tableName: string,
   schema: { name: string; type: string; mode: string }[],
-  maxRetries: number = 3
+  maxRetries: number = 3,
 ): Promise<Table> {
   const table = db_dataset.table(tableName);
 
-  const delay = (ms: number): Promise<void> =>
-    new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
+  const delay = (ms: number): Promise<void> => new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -33,19 +32,18 @@ async function createTableIfNotExists(
         await delay(5000); // Wait for 5 seconds before proceeding
 
         return createdTable;
-      } else {
-        return table;
       }
+      return table;
     } catch (error) {
       if (attempt === maxRetries) {
         logger.error(
-          `Failed to create table ${tableName} after ${maxRetries} attempts.`
+          `Failed to create table ${tableName} after ${maxRetries} attempts.`,
         );
 
         throw error;
       } else {
         console.warn(
-          `Attempt ${attempt} to create table ${tableName} failed. Retrying...`
+          `Attempt ${attempt} to create table ${tableName} failed. Retrying...`,
         );
 
         await delay(1000 * attempt); // Wait for an increasing delay before retrying
@@ -54,7 +52,7 @@ async function createTableIfNotExists(
   }
 
   throw new Error(
-    `Failed to create or access table ${tableName} after ${maxRetries} attempts.`
+    `Failed to create or access table ${tableName} after ${maxRetries} attempts.`,
   );
 }
 
@@ -65,6 +63,4 @@ export async function tableHandle() {
 
   // Create or get the 'temp_updated_leads' table using the specified schema
   tempTable = await createTableIfNotExists('temp_updated_leads', db_tempSchema);
-
-  return;
 }

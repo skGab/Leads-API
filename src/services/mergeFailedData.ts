@@ -7,7 +7,7 @@ export default function mergeFailedData(
   uniqueCoreDataList: CoreData,
   updatedCoreDataList: LeadSearched[],
   failedUniqueDataBuffer: CoreData,
-  failedUpdatedDataBuffer: LeadSearched[]
+  failedUpdatedDataBuffer: LeadSearched[],
 ): {
   mergedUniqueDataBuffer: CoreData;
   mergedUpdatedDataBuffer: LeadSearched[];

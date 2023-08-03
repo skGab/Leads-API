@@ -6,7 +6,7 @@ export async function getOldRowsFromMain(
   bigqueryClient: BigQuery,
   db_dataset: Dataset,
   db_table: Table,
-  coreDataiDS: string[]
+  coreDataiDS: string[],
 ): Promise<Array<{ id: string }>> {
   const queryOldRowsFromMain = `
         SELECT id
@@ -30,7 +30,7 @@ export async function getOldRowsFromTemp(
   db_dataset: Dataset,
   tempTable: Table,
   avaliableIDs: string[],
-  coreDataIds: string[]
+  coreDataIds: string[],
 ): Promise<{
   availableOldRowsFromTemp: LeadSearched[];
   allOldRowsFromTemp: string[];
@@ -50,7 +50,7 @@ export async function getOldRowsFromTemp(
   const optionsAllOldRowsFromTemp = {
     query: queryAllOldRowsFromTemp,
     params: {
-      coreDataIds: coreDataIds,
+      coreDataIds,
     },
   };
 

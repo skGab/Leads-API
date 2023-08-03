@@ -16,14 +16,14 @@ export const sentStreaming = async (
   db_dataset: Dataset,
   db_table: Table,
   tempTable: Table,
-  bigqueryClient: BigQuery
+  bigqueryClient: BigQuery,
 ): Promise<void> => {
   // Remove duplicate IDs from dataBuffer, keeping only the last object
   const filteredDataBuffer = removeDuplicateIds(dataBuffer);
 
   console.log(
     'Leads duplicados removidos, leads unicos:',
-    filteredDataBuffer.length
+    filteredDataBuffer.length,
   );
   console.log('---------------------------------------');
 
@@ -38,7 +38,7 @@ export const sentStreaming = async (
     bigqueryClient,
     db_dataset,
     db_table,
-    leadIds
+    leadIds,
   );
 
   console.log('Leads existentes do BigQuery:', existingLeadsData);
@@ -47,7 +47,7 @@ export const sentStreaming = async (
   // Separate leads that need to be inserted and updated
   const { uniqueCoreDataList, updatedCoreDataList } = separateLeads(
     filteredDataBuffer,
-    existingLeadsData
+    existingLeadsData,
   );
 
   console.log('Leads na fila de não repetidos:', uniqueCoreDataList.length);
@@ -75,8 +75,8 @@ export const sentStreaming = async (
         db_dataset,
         db_table,
         tempTable,
-        updatedCoreDataList
-      )
+        updatedCoreDataList,
+      ),
     );
   }
 

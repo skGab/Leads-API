@@ -6,7 +6,7 @@ export async function updateLeads(
   bigqueryClient: BigQuery,
   db_dataset: Dataset,
   db_table: Table,
-  oldRowsFromTemp: LeadSearched[]
+  oldRowsFromTemp: LeadSearched[],
 ) {
   for (const lead of oldRowsFromTemp) {
     const queryUpdate = `

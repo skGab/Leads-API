@@ -8,13 +8,23 @@
   "scripts": {
     "dev": "tsx watch src/app.ts",
     "build": "tsup src/app.ts",
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "npx eslint src/",
+    "format": "npx prettier . --write"
   },
   "author": "Gabriel - Black Beans",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.28.0",
+    "prettier": "^3.0.0",
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
     "typescript": "^5.0.4"

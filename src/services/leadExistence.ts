@@ -16,7 +16,7 @@ export async function getExistingLeadIdsInBigQuery(
   dataset: Dataset,
   table: Table,
   leadIds: string[],
-  chunkSize: number = 1000 // Adjust this value as needed
+  chunkSize: number = 1000, // Adjust this value as needed
 ): Promise<LeadSearched[]> {
   const existingLeadIds: LeadSearched[] = [];
 
@@ -34,7 +34,7 @@ export async function getExistingLeadIdsInBigQuery(
         opportunity: row.opportunity,
         lead_stage: row.lead_stage,
         timestamp: row.timestamp.value,
-      }))
+      })),
     );
   }
 

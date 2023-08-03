@@ -11,12 +11,10 @@ export default function corsRegister() {
       // Check if the origin matches the allowed domain
       if (origin === 'https://app.rdstation.com.br') {
         return cb(null, true);
-      } else {
-        // Return an error if the origin does not match the allowed domain
-        const corsError = new Error('403: Not allowed by CORS');
-        return cb(corsError, false);
       }
+      // Return an error if the origin does not match the allowed domain
+      const corsError = new Error('403: Not allowed by CORS');
+      return cb(corsError, false);
     },
   });
-  return;
 }
