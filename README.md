@@ -61,13 +61,15 @@ O objetivo da Leads API é receber dados via webhook da plataforma RD Station e 
 ## Requerimentos de qualidade <a name="quality"></a>
 
 - Performance
-- Sustentável (Melhorar)
+- Sustentável
 - Disponibilidade 24/7
 - Escalavel
 
 ## Instruções de Uso <a name="glossary"></a>
 
-- Certifique-se de ter o Node.js instalado em seu sistema, clone o repositorio e em seguida execute o comando para instalar as dependências do projeto:
+- Pela arquitetura atual do projeto será necessario fazer as devidas modificações na pasta "helpers", la se encontra implementações que estão mais voltadas  para a API do Google - Big Query. 
+
+- Certifique-se de ter o Node.js instalado em seu sistema, clone o repositorio e em seguida execute o comando para instalar as dependências do projeto.:
 
 `npm install`
 
@@ -85,17 +87,13 @@ O sistema estará disponível em http://localhost:5000/. As alterações no cód
 
 `npm run build`
 
-Os arquivos finais serão gerados na pasta 'build'.
+Os arquivos finais serão gerados na pasta 'dist'.
 
 <br>
 
-- Após o processo de build, visualize a versão de produção localmente com o seguinte comando:
+Após o build, para iniciar a aplicação puxando o arquivo de dentro da pasta "dist", rodamos o comando:
 
-`npm run preview`
-
-O sistema estará disponível em http://localhost:5000/ em uma versão otimizada para produção.
-
-<br>
+`npm run start`
 
 - O projeto utiliza ESLint para análise estática do código e Prettier para formatação. Verifique problemas de linting ou formate o código automaticamente com os seguintes comandos:
 
