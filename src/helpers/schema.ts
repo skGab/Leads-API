@@ -28,7 +28,7 @@ export const leadSchema = z.object({
         last_conversion: z.unknown().nullable(),
         tags: z.unknown().nullable(),
         custom_fields: z.unknown().nullable(),
-      })
+      }),
     )
     .nonempty(),
 });

@@ -10,7 +10,7 @@ export default async function handleLeadUpdates(
   db_dataset: Dataset,
   db_table: Table,
   tempTable: Table,
-  mergedUpdatedDataBuffer: LeadSearched[]
+  mergedUpdatedDataBuffer: LeadSearched[],
 ) {
   // Function to retrieve old rows from the main table
   const coreDataIds = mergedUpdatedDataBuffer.map((lead) => lead.id);
@@ -19,13 +19,13 @@ export default async function handleLeadUpdates(
     bigqueryClient,
     db_dataset,
     db_table,
-    coreDataIds
+    coreDataIds,
   );
   const avaliableIDs = oldRowsFromMain.map((lead) => lead.id);
 
   console.log(
     'Linhas antigas da tabela principal prontas para atualização:',
-    avaliableIDs
+    avaliableIDs,
   );
   console.log('---------------------------------------');
 
@@ -36,19 +36,19 @@ export default async function handleLeadUpdates(
       db_dataset,
       tempTable,
       avaliableIDs,
-      coreDataIds
+      coreDataIds,
     );
 
   console.log(
     'Dados pegos da tabela temporaria e prontos para atualização:',
-    availableOldRowsFromTemp
+    availableOldRowsFromTemp,
   );
 
   if (availableOldRowsFromTemp.length > 0) {
     // Replace the old data in oldRowsFromTemp with the new data from mergedUpdatedDataBuffer if there's a match in the id
     const updatedRowsFromTemp = availableOldRowsFromTemp.map((oldRow) => {
       const newData = mergedUpdatedDataBuffer.find(
-        (newRow) => newRow.id === oldRow.id
+        (newRow) => newRow.id === oldRow.id,
       );
 
       return newData || oldRow;
@@ -59,7 +59,7 @@ export default async function handleLeadUpdates(
       bigqueryClient,
       db_dataset,
       db_table,
-      updatedRowsFromTemp
+      updatedRowsFromTemp,
     );
     console.log('Leads atualizados no BigQuery', updatedRowsFromTemp);
     console.log('---------------------------------------');
@@ -69,7 +69,7 @@ export default async function handleLeadUpdates(
       bigqueryClient,
       db_dataset,
       tempTable,
-      updatedRowsFromTemp
+      updatedRowsFromTemp,
     );
     console.log('Dados antigos removidos da tabela temporária');
     console.log('---------------------------------------');
@@ -77,7 +77,7 @@ export default async function handleLeadUpdates(
 
   // Find the leads in the mergedUpdatedDataBuffer that also exist in leadIdsMain
   const leadsToUpdate = mergedUpdatedDataBuffer.filter((lead) =>
-    avaliableIDs.includes(lead.id)
+    avaliableIDs.includes(lead.id),
   );
 
   if (leadsToUpdate.length > 0) {
@@ -89,7 +89,7 @@ export default async function handleLeadUpdates(
     // Find the leads that are not in the temp table
     const leadsToTemp = mergedUpdatedDataBuffer.filter(
       (lead) =>
-        allOldRowsFromTemp.includes(lead.id) || avaliableIDs.includes(lead.id)
+        allOldRowsFromTemp.includes(lead.id) || avaliableIDs.includes(lead.id),
     );
 
     if (leadsToTemp.length > 0) {

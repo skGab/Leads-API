@@ -6,7 +6,7 @@ export async function deleteOldRowsFromTemp(
   bigqueryClient: BigQuery,
   db_dataset: Dataset,
   tempTable: Table,
-  updatedRowsFromTemp: LeadSearched[]
+  updatedRowsFromTemp: LeadSearched[],
 ) {
   for (const lead of updatedRowsFromTemp) {
     const queryDelete = `

@@ -1,0 +1,2 @@
+[  ] setup lint
+[  ] setup prettie

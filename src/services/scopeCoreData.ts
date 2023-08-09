@@ -38,7 +38,7 @@ export const scopeCoreData = (lead: Lead): LeadFilterResult => {
     // Check if the key should be included in otherData
     if (
       ['first_conversion', 'last_conversion', 'tags', 'custom_fields'].includes(
-        key
+        key,
       )
     ) {
       otherData[key] = value;

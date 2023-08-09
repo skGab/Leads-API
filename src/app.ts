@@ -4,8 +4,8 @@ import fastify, {
   FastifyReply,
   FastifyRequest,
 } from 'fastify';
-import clientes from './routes/clientes';
 import * as dotenv from 'dotenv';
+import clientes from './routes/clientes';
 import { db_table, tableHandle, tempTable } from './services/tableHandle';
 import { CoreData } from './helpers/interfaces';
 import { startServer } from './server';
@@ -28,7 +28,8 @@ corsRegister();
 (async function setupApp() {
   try {
     // Create the table if it doesn't exist
-    tableHandle();
+    // tableHandle();
+    console.log('Tabelas criadas');
 
     // Registering Routes
     app.get('/', (_req: FastifyRequest, res: FastifyReply) => {
