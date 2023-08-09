@@ -67,7 +67,7 @@ O objetivo da Leads API é receber dados via webhook da plataforma RD Station e 
 
 ## Instruções de Uso <a name="glossary"></a>
 
-- Pela arquitetura atual do projeto será necessario fazer as devidas modificações na pasta "helpers", la se encontra implementações que estão mais voltadas  para a API do Google - Big Query. 
+- Pela arquitetura atual do projeto será necessario fazer as devidas modificações na pasta "helpers", la se encontra implementações que estão mais voltadas para a API do Google - Big Query.
 
 - Certifique-se de ter o Node.js instalado em seu sistema, clone o repositorio e em seguida execute o comando para instalar as dependências do projeto.:
 

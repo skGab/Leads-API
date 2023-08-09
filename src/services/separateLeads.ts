@@ -15,8 +15,8 @@ export default function separateLeads(
     if (existingLead) {
       // Compare opportunity and lead_stage fields, and add to updatedCoreDataList if they are different
       if (
-        existingLead.opportunity !== coreData.opportunity
-        || existingLead.lead_stage !== coreData.lead_stage
+        existingLead.opportunity !== coreData.opportunity ||
+        existingLead.lead_stage !== coreData.lead_stage
       ) {
         updatedCoreDataList.push({
           id: coreData.id,

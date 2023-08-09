@@ -15,9 +15,10 @@ async function createTableIfNotExists(
 ): Promise<Table> {
   const table = db_dataset.table(tableName);
 
-  const delay = (ms: number): Promise<void> => new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+  const delay = (ms: number): Promise<void> =>
+    new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {

@@ -49,4 +49,4 @@ corsRegister();
   } catch (error) {
     logger.error('Erro ao criar a tabela ou configurar rotas:', error);
   }
-}());
+})();

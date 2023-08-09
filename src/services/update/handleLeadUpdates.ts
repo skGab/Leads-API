@@ -30,13 +30,14 @@ export default async function handleLeadUpdates(
   console.log('---------------------------------------');
 
   // Function to retrieve old rows from the temporary table based on lead IDs
-  const { availableOldRowsFromTemp, allOldRowsFromTemp } = await getOldRowsFromTemp(
-    bigqueryClient,
-    db_dataset,
-    tempTable,
-    avaliableIDs,
-    coreDataIds,
-  );
+  const { availableOldRowsFromTemp, allOldRowsFromTemp } =
+    await getOldRowsFromTemp(
+      bigqueryClient,
+      db_dataset,
+      tempTable,
+      avaliableIDs,
+      coreDataIds,
+    );
 
   console.log(
     'Dados pegos da tabela temporaria e prontos para atualização:',
@@ -75,7 +76,9 @@ export default async function handleLeadUpdates(
   }
 
   // Find the leads in the mergedUpdatedDataBuffer that also exist in leadIdsMain
-  const leadsToUpdate = mergedUpdatedDataBuffer.filter((lead) => avaliableIDs.includes(lead.id));
+  const leadsToUpdate = mergedUpdatedDataBuffer.filter((lead) =>
+    avaliableIDs.includes(lead.id),
+  );
 
   if (leadsToUpdate.length > 0) {
     // Function to update existing leads in the main table
@@ -85,7 +88,8 @@ export default async function handleLeadUpdates(
   } else {
     // Find the leads that are not in the temp table
     const leadsToTemp = mergedUpdatedDataBuffer.filter(
-      (lead) => allOldRowsFromTemp.includes(lead.id) || avaliableIDs.includes(lead.id),
+      (lead) =>
+        allOldRowsFromTemp.includes(lead.id) || avaliableIDs.includes(lead.id),
     );
 
     if (leadsToTemp.length > 0) {

@@ -5,9 +5,10 @@ import { BigQuery } from '@google-cloud/bigquery';
 const env = process.env.NODE_ENV;
 
 // Set the path based on the environment
-const credentialsPath = env === 'production'
-  ? '../www/data/credentials.json'
-  : '../data/credentials.json';
+const credentialsPath =
+  env === 'production'
+    ? '../www/data/credentials.json'
+    : '../data/credentials.json';
 
 // Set up the auth object using environment variables or default values
 const auth = {
