@@ -54,7 +54,7 @@ O objetivo da Leads API é receber dados via webhook da plataforma RD Station e 
 - Atualização de dados no Bigquery
 - Inserção de dados no bigquery
 - Criação de tabelas
-- Categorização de Leads (Leads novos && Leads para atualização)
+- Categorização de Leads (Leads novos & Leads para atualização)
 - Remoção de Leads duplicados
 - Filtra os campos principais dos dados
 
